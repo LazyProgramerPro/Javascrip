@@ -17,11 +17,11 @@ const reservationInventory = async ({productId, quantity, cartId}) => {
     inven_stock: { $gte: quantity }
   }
   const updateSet = {
-    $inc: {
+    $inc: { // GIẢM, TRỪ ĐI SỐ LƯỢNG ĐÃ MUA
       inven_stock: -quantity
     },
     $push: {
-      inven_reservations: {
+      inven_reservations: { // CẬP NHẬP LẠI THÔNG TIN ĐỂ CHECK XEM GIỎ HÀNG NÀO MUA, MUA LÚC NÀO SỐ LƯỢNG BAO NHIÊU
         quantity,
         cartId,
         // TODO date
