@@ -217,16 +217,45 @@ const task = {
 
 ## Các mô hình triển khai MongoDB
 
-1.Standalone: Chỉ có 1 máy chủ duy nhất, hoặc 1 server duy nhất được cài con Mongo, tất cả ứng dụng của chúng ta đọc ghi đều trên 1 con DB duy nhất
+# Các Mô Hình Triển Khai MongoDB
 
-- Ưu điểm: Dễ cài đặt, triển khai chỉ 1 vài câu lệnh
-- Nhược điểm: Không có khả năng mở rộng, không có khả năng chịu lỗi, không có khả năng backup (Liên quan đến tính sẵn sàng-Dowtime là cook).Yêu cầu phải có 1 con server mạnh mẽ, cần phải biết tối ưu hiệu năng
-2.Replica Set: 1 tập hợp các máy chủ, mỗi máy chủ sẽ chứa 1 bản sao của dữ liệu (Mỗi máy chủ cài 1 con Mongo), 1 máy chủ sẽ là primary(chịu trách nhiệm đọc ghi), các máy chủ còn lại sẽ là secondary(update dữ liệu từ con chính), khi primary bị lỗi thì 1 secondary sẽ được chọn làm primary
-- Ưu điểm: Có khả năng mở rộng, có khả năng chịu lỗi, có khả năng backup => Ứng dụng của chúng ta sẽ không bị dán đoạn
-- Nhược điểm: Khó cài đặt, triển khai, cần phải cấu hình nhiều, khó mở rộng theo chiều ngang. Nếu mở rộng theo chiều dọc thì chúng ta phải cắm thêm RAM, CPU
-3.Sharded Cluster: 1 tập hợp các replica set, mỗi replica set sẽ chứa 1 bản sao của dữ liệu, mỗi replica set sẽ chứa 1 phần dữ liệu, 1 máy chủ sẽ là router, router sẽ chịu trách nhiệm phân phối dữ liệu cho các replica set
-- Ưu điểm: Có khả năng mở rộng, có khả năng chịu lỗi, có khả năng backup, có khả năng mở rộng theo chiều ngang.Trong quá trình phát triển nếu gặp các vấn đề về hiệu năng chúng ta có thể cắm thêm các máy chủ
-- Nhược điểm: Khó cài đặt, triển khai, cần phải cấu hình rất nhiều
+## 1. Standalone
+
+Chỉ có 1 máy chủ duy nhất, hoặc 1 server duy nhất được cài MongoDB, tất cả ứng dụng của chúng ta đọc ghi đều trên 1 cơ sở dữ liệu duy nhất.
+
+- **Ưu điểm**:
+  - Dễ cài đặt, triển khai chỉ với một vài câu lệnh.
+- **Nhược điểm**:
+  - Không có khả năng mở rộng.
+  - Không có khả năng chịu lỗi.
+  - Không có khả năng backup (Liên quan đến tính sẵn sàng - Downtime là cook).
+  - Yêu cầu phải có một server mạnh mẽ, cần phải biết tối ưu hiệu năng.
+
+## 2. Replica Set
+
+Một tập hợp các máy chủ, mỗi máy chủ sẽ chứa một bản sao của dữ liệu (Mỗi máy chủ cài một MongoDB). Một máy chủ sẽ là primary (chịu trách nhiệm đọc ghi), các máy chủ còn lại sẽ là secondary (update dữ liệu từ primary). Khi primary bị lỗi thì một secondary sẽ được chọn làm primary.
+
+- **Ưu điểm**:
+  - Có khả năng mở rộng.
+  - Có khả năng chịu lỗi.
+  - Có khả năng backup.
+  - Ứng dụng của chúng ta sẽ không bị gián đoạn.
+- **Nhược điểm**:
+  - Khó cài đặt, triển khai, cần phải cấu hình nhiều.
+  - Khó mở rộng theo chiều ngang. Nếu mở rộng theo chiều dọc thì cần phải thêm RAM, CPU.
+
+## 3. Sharded Cluster
+
+Một tập hợp các replica set, mỗi replica set sẽ chứa một bản sao của dữ liệu, mỗi replica set sẽ chứa một phần dữ liệu. Một máy chủ sẽ là router, router sẽ chịu trách nhiệm phân phối dữ liệu cho các replica set.
+
+- **Ưu điểm**:
+  - Có khả năng mở rộng.
+  - Có khả năng chịu lỗi.
+  - Có khả năng backup.
+  - Có khả năng mở rộng theo chiều ngang.
+  - Trong quá trình phát triển nếu gặp các vấn đề về hiệu năng có thể thêm các máy chủ.
+- **Nhược điểm**:
+  - Khó cài đặt, triển khai, cần phải cấu hình rất nhiều.
 
 ## Triển khai
 
