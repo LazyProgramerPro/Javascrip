@@ -14,17 +14,17 @@
 
 - Câu trả lời nằm ở việc chúng ta cần phải hiểu rõ về dữ liệu của mình,dự án của mình, hiểu rõ về cách mà dữ liệu của mình sẽ được truy cập và sử dụng, hiểu rõ về cách mà dữ liệu của mình sẽ được cập nhật và xóa, hiểu rõ về cách mà dữ liệu của mình sẽ được tìm kiếm và sắp xếp.
 
-- Một cái quan trọng nữa là việc CSDL của chúng ta đọc nhiều hơn ghi hay ghi nhiều hơn đọc :IoT(ghi nhiều hơn: mỗi tháng đọc 1 lần nhưng ghi mỗi giây), đọc ghi đồng thời hay phân tán (push vs pull)
+- Một cái quan trọng nữa là việc CSDL của chúng ta đọc nhiều hơn ghi hay ghi nhiều hơn đọc :IoT(ghi nhiều hơn: mỗi tháng đọc 1 lần nhưng ghi mỗi giây), đọc ghi đồng thời hay phân tán (push vs pull).
 
-- Dự đoán được hướng phát triển của DB của chúng ta trong tương lai, dự đoán được số lượng người dùng, số lượng dữ liệu, số lượng truy cập, số lượng cập nhật, số lượng xóa, số lượng tìm kiếm, số lượng sắp xếp
+- Dự đoán được hướng phát triển của DB của chúng ta trong tương lai, dự đoán được số lượng người dùng, số lượng dữ liệu, số lượng truy cập, số lượng cập nhật, số lượng xóa, số lượng tìm kiếm, số lượng sắp xếp.
 
 ## So sánh các thuật ngữ trong mysql và mongodb
 
 ## Relationships in MongoDB
 
-- Embedded là việc chúng ta nhúng 1 tài liệu vào 1 tài liệu khác, ưu điểm lad select 1 lần ra tất cả (Dữ liệu truy vấn sẽ bị chậm khi dữ liệu lớn)
+- Embedded là việc chúng ta nhúng 1 tài liệu vào 1 tài liệu khác, ưu điểm lad select 1 lần ra tất cả (Dữ liệu truy vấn sẽ bị chậm khi dữ liệu lớn).
 
-- Reference là việc chúng ta lưu 1 ObjectId của 1 tài liệu vào 1 tài liệu khác, ưu điểm là update 1 lần cho nhiều tài liệu
+- Reference là việc chúng ta lưu 1 ObjectId của 1 tài liệu vào 1 tài liệu khác, ưu điểm là update 1 lần cho nhiều tài liệu.
 
 ## One-to-One Relationships
 
@@ -33,7 +33,7 @@ VD: user có đang ngồi làm việc cho 1 công ty duy nhất
 ```js
 // 1.Embedding
 const user = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f3f3"),
+  id: ObjectId("user_1"),
   name: "John Doe",
   company: {
     name: "ABC Company",
@@ -46,9 +46,18 @@ const user = {
 
 // 2.Reference
 const user = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+  id: ObjectId("user_1"),
   name: "John Doe",
-  company: ObjectId("5f43f3f3f3f3f3f3f3f3f4"),
+  company: ObjectId("company"),
+};
+
+const company = {
+  id: ObjectId("company"),
+  name: "ABC Company",
+  address: "123 Main St",
+  city: "Springfield",
+  state: "IL",
+  zip: "62701",
 };
 ```
 
@@ -111,7 +120,7 @@ const address2 = {
 };
 ```
 
-Nhược điểm : Không thể lớn quá 16MB, Hiệu suất thêm sửa xóa cực kì chậm, phân trang kém(không thể lấy hết ra sau đó skip) ==> KHÔNG NÊN (Phù hợp với sinh viên)
+Nhược điểm : Document không thể lớn quá 16MB, hiệu suất thêm sửa xóa cực kì chậm, phân trang kém(không thể lấy hết ra sau đó skip) ==> KHÔNG NÊN (phù hợp với sinh viên)
 
 Nhược điểm : Phải tốn nhiều truy vấn hơn, nếu có 100000 document thì việc phân trang nó cũng không hiệu quả(cam đoan với ae trong code đang dùng skip, limit), vì nó cũng sẽ request hết 100000 document về rồi mới phân trang kể cả việc mình có đánh index
 
@@ -119,9 +128,9 @@ HANDLE : Bucket Pattern (Chia nhỏ dữ liệu ra để tránh việc lấy h�
 
 ## Bucket Pattern là gì?
 
-## One-to-Huge Relationships: Cực nhiều (cái này sẽ không nhúng thằng con vaofo thắng cha mà sẽ nhúng thằng cha vào thằng con)
+## One-to-Huge Relationships
 
-Ví dụ 1 host có nhiều log, chúng ta không thể làm ntn đc
+Cái này sẽ không nhúng thằng con vaofo thắng cha mà sẽ nhúng thằng cha vào thằng con
 
 ```js
 const host = {
@@ -151,9 +160,9 @@ const host = {
 }
 ```
 
-Chúng ta k thể làm như thế này đc vị khi dữ liệu nhiều thì document sẽ lớn và chậm và nó có thể đạt kích thước 16MB
+Ví dụ 1 host có nhiều log, chúng ta không thể làm ntn đc vì khi dữ liệu nhiều thì document sẽ lớn và chậm và nó có thể đạt kích thước 16MB
 
-Chúng ta sẽ làm như thế này
+Chúng ta sẽ làm như thế này:
 
 ```js
 const host = {
@@ -212,21 +221,21 @@ const task = {
 
 - Ưu điểm: Dễ cài đặt, triển khai chỉ 1 vài câu lệnh
 - Nhược điểm: Không có khả năng mở rộng, không có khả năng chịu lỗi, không có khả năng backup (Liên quan đến tính sẵn sàng-Dowtime là cook).Yêu cầu phải có 1 con server mạnh mẽ, cần phải biết tối ưu hiệu năng
-  2.Replica Set: 1 tập hợp các máy chủ, mỗi máy chủ sẽ chứa 1 bản sao của dữ liệu (Mỗi máy chủ cài 1 con Mongo), 1 máy chủ sẽ là primary(chịu trách nhiệm đọc ghi), các máy chủ còn lại sẽ là secondary(update dữ liệu từ con chính), khi primary bị lỗi thì 1 secondary sẽ được chọn làm primary
+2.Replica Set: 1 tập hợp các máy chủ, mỗi máy chủ sẽ chứa 1 bản sao của dữ liệu (Mỗi máy chủ cài 1 con Mongo), 1 máy chủ sẽ là primary(chịu trách nhiệm đọc ghi), các máy chủ còn lại sẽ là secondary(update dữ liệu từ con chính), khi primary bị lỗi thì 1 secondary sẽ được chọn làm primary
 - Ưu điểm: Có khả năng mở rộng, có khả năng chịu lỗi, có khả năng backup => Ứng dụng của chúng ta sẽ không bị dán đoạn
 - Nhược điểm: Khó cài đặt, triển khai, cần phải cấu hình nhiều, khó mở rộng theo chiều ngang. Nếu mở rộng theo chiều dọc thì chúng ta phải cắm thêm RAM, CPU
-  3.Sharded Cluster: 1 tập hợp các replica set, mỗi replica set sẽ chứa 1 bản sao của dữ liệu, mỗi replica set sẽ chứa 1 phần dữ liệu, 1 máy chủ sẽ là router, router sẽ chịu trách nhiệm phân phối dữ liệu cho các replica set
+3.Sharded Cluster: 1 tập hợp các replica set, mỗi replica set sẽ chứa 1 bản sao của dữ liệu, mỗi replica set sẽ chứa 1 phần dữ liệu, 1 máy chủ sẽ là router, router sẽ chịu trách nhiệm phân phối dữ liệu cho các replica set
 - Ưu điểm: Có khả năng mở rộng, có khả năng chịu lỗi, có khả năng backup, có khả năng mở rộng theo chiều ngang.Trong quá trình phát triển nếu gặp các vấn đề về hiệu năng chúng ta có thể cắm thêm các máy chủ
 - Nhược điểm: Khó cài đặt, triển khai, cần phải cấu hình rất nhiều
 
 ## Triển khai
 
-1.On-premise(Standalone): Cài đặt trên máy chủ của chúng ta, tải mongo compas, tải mongo shell, cài đặt mongo server
-2.Cloud: Có thể sử dụng các dịch vụ của các công ty lớn như AWS, Azure, Google Cloud, IBM Cloud, Digital Ocean, Linode, Vultr, Heroku, Firebase, MongoDB Atlas.MongoDB Atlas cung cấp sẵn cho chúng ta 1 con DB trên Cloud(512MB), mô hình Replica Set 1 chính 2 phụ
+- 1.On-premise(Standalone): Cài đặt trên máy chủ của chúng ta, tải mongo compas, tải mongo shell, cài đặt mongo server
+- 2.Cloud: Có thể sử dụng các dịch vụ của các công ty lớn như AWS, Azure, Google Cloud, IBM Cloud, Digital Ocean, Linode, Vultr, Heroku, Firebase, MongoDB Atlas.MongoDB Atlas cung cấp sẵn cho chúng ta 1 con DB trên Cloud(512MB), mô hình Replica Set 1 chính 2 phụ
 
 ## Design Pattern
 
-12 DESIGN PATTERN: Chúng ta chỉ cần nắm rõ khi nào sử dụng cái nào thôi
+- 12 DESIGN PATTERN: Chúng ta chỉ cần nắm rõ khi nào sử dụng cái nào thôi
 
 ## Các vấn đề về hiệu năng
 
