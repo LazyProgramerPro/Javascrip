@@ -1,6 +1,22 @@
-# MERNESHOP2023
-
 ## MongoDB là gì?
+- Là một CSDL no SQL linh hoạt, dữ liệu được lưu trữ dưới dạng JSON, dữ liệu được lưu trữ dưới dạng document.
+## Khác biệt giữa MongoDB và SQL
+- SQL: Dữ liệu được lưu trữ dưới dạng bảng, mỗi bảng sẽ chứa nhiều dòng, mỗi dòng sẽ chứa nhiều cột, mỗi cột sẽ chứa một kiểu dữ liệu.
+- MongoDB: Dữ liệu được lưu trữ dưới dạng document, mỗi document sẽ chứa nhiều field, mỗi field sẽ chứa nhiều value, mỗi value sẽ chứa nhiều kiểu dữ liệu.
+- MongoDB không cần phải định nghĩa schema trước, có thể thêm bất kỳ field nào vào document mà không cần phải thêm field đó vào schema.
+## Database, Collection, Document
+- Database: Là nơi chứa các collection, mỗi database sẽ chứa nhiều collection.
+- Collection: Là nơi chứa các document, mỗi collection sẽ chứa nhiều document.
+- Document: Là dữ liệu được lưu trữ dưới dạng JSON, mỗi document sẽ chứa nhiều field, mỗi field sẽ chứa nhiều value.
+## Field, Value
+- Field: Là tên của một trường dữ liệu, mỗi field sẽ chứa một value.
+- Value: Là giá trị của một trường dữ liệu, mỗi value sẽ chứa một kiểu dữ liệu.
+## Schema, Model
+- Schema: Là cấu trúc của một document, mỗi schema sẽ chứa nhiều field, mỗi field sẽ chứa một kiểu dữ liệu.
+- Model: Là một class được tạo ra từ schema, mỗi model sẽ chứa nhiều method để thao tác với document.
+## JSON, BSON
+- JSON: Là kiểu dữ liệu dạng text, dữ liệu được lưu trữ dưới dạng JSON sẽ chứa nhiều field, mỗi field sẽ chứa nhiều value.
+- BSON: Là kiểu dữ liệu dạng binary, dữ liệu được lưu trữ dưới dạng BSON sẽ chứa nhiều field, mỗi field sẽ chứa nhiều value.
 
 ## MongoDB có khả năng xử lý dữ liệu lớn như thế nào so với các hệ thống quản lý cơ sở dữ liệu khác?
 
@@ -10,20 +26,53 @@
 
 ## Các thông số kết nối?
 
+## CRUD
+- Create: Tạo mới một document.
+  - insertOne(data, options)
+  - insertMany(data, options)
+- Read: Đọc dữ liệu từ một document.
+  - find(query, options)
+  - findOne(query, options)
+- Update: Cập nhật dữ liệu từ một document.
+  - updateOne(query, data, options)
+  - updateMany(query, data, options)
+  - replaceOne(query, data, options)
+- Delete: Xóa dữ liệu từ một document.
+  - deleteOne(query, options)
+  - deleteMany(query, options)
+
+## Schema
+- MongoDB không cần phải định nghĩa schema trước, có thể thêm bất kỳ field nào vào document mà không cần phải thêm field đó vào schema
+- Schema là cấu trúc của một document, mỗi schema sẽ chứa nhiều field, mỗi field sẽ chứa một kiểu dữ liệu
+- Thực tế là các ứng dụng cần sử dụng schema để đảm bảo dữ liệu được lưu trữ đúng cách, schema giúp cho việc đọc, ghi, cập nhật, xóa dữ liệu trở nên dễ dàng hơn (Map data)
+## Data Types
+- String: Là kiểu dữ liệu dạng text, mỗi field sẽ chứa một chuỗi ký tự.
+- Number: Là kiểu dữ liệu dạng số, mỗi field sẽ chứa một số.
+- Date: Là kiểu dữ liệu dạng ngày tháng, mỗi field sẽ chứa một ngày tháng.
+- Boolean: Là kiểu dữ liệu dạng boolean, mỗi field sẽ chứa một giá trị true hoặc false.
+- Object: Là kiểu dữ liệu dạng object, mỗi field sẽ chứa một object.
+- Array: Là kiểu dữ liệu dạng mảng, mỗi field sẽ chứa một mảng.
+- ObjectId: Là kiểu dữ liệu dạng ObjectId, mỗi field sẽ chứa một ObjectId.
+## Validation
+- Required: Bắt buộc phải có giá trị.
+- Default: Giá trị mặc định.
+- Enum: Giá trị phải nằm trong một danh sách.
+- Min: Giá trị nhỏ nhất.
+- Max: Giá trị lớn nhất.
+- Match: Giá trị phải khớp với một biểu thức chính quy.
+
 ## Làm thế nào để cấu trúc được schema của MongoDB cho ứng dụng của chúng ta thực sự hiệu quả và có thể lưu được dữ liệu lớn?
 
 - Câu trả lời nằm ở việc chúng ta cần phải hiểu rõ về dữ liệu của mình,dự án của mình, hiểu rõ về cách mà dữ liệu của mình sẽ được truy cập và sử dụng, hiểu rõ về cách mà dữ liệu của mình sẽ được cập nhật và xóa, hiểu rõ về cách mà dữ liệu của mình sẽ được tìm kiếm và sắp xếp.
-
 - Một cái quan trọng nữa là việc CSDL của chúng ta đọc nhiều hơn ghi hay ghi nhiều hơn đọc :IoT(ghi nhiều hơn: mỗi tháng đọc 1 lần nhưng ghi mỗi giây), đọc ghi đồng thời hay phân tán (push vs pull).
-
 - Dự đoán được hướng phát triển của DB của chúng ta trong tương lai, dự đoán được số lượng người dùng, số lượng dữ liệu, số lượng truy cập, số lượng cập nhật, số lượng xóa, số lượng tìm kiếm, số lượng sắp xếp.
 
 ## So sánh các thuật ngữ trong mysql và mongodb
 
 ## Relationships in MongoDB
 
+- Relationships: Mối quan hệ giữa các document, mỗi document sẽ chứa một hoặc nhiều ObjectId của các document khác.
 - Embedded là việc chúng ta nhúng 1 tài liệu vào 1 tài liệu khác, ưu điểm lad select 1 lần ra tất cả (Dữ liệu truy vấn sẽ bị chậm khi dữ liệu lớn).
-
 - Reference là việc chúng ta lưu 1 ObjectId của 1 tài liệu vào 1 tài liệu khác, ưu điểm là update 1 lần cho nhiều tài liệu.
 
 ## One-to-One Relationships
@@ -68,7 +117,7 @@ VD: user có thể có nhiều địa chỉ
 ```js
 // 1.Embedding
 const user = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+  id: ObjectId("user"),
   name: "John Doe",
   addresses: [
     {
@@ -88,43 +137,43 @@ const user = {
 
 // 2.Reference
 const user = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+  id: ObjectId("user"),
   name: "John Doe",
   addresses: [
-    ObjectId("5f43f3f3f3f3f3f3f3f3f4"),
-    ObjectId("5f43f3f3f3f3f3f3f3f3f5"),
+    ObjectId("address1"),
+    ObjectId("address2"),
   ],
 };
 
-const user = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+const user1 = {
+  id: ObjectId("user1"),
   name: "John Doe",
 };
 
 const address1 = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f4"),
+  id: ObjectId("address1"),
   street: "123 Main St",
   city: "Springfield",
   state: "IL",
   zip: "62701",
-  user: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+  user: ObjectId("user1"),
 };
 
 const address2 = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f4"),
+  id: ObjectId("address2"),
   street: "123 Main St",
   city: "Springfield",
   state: "IL",
   zip: "62701",
-  user: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+  user: ObjectId("user1"),
 };
 ```
 
-Nhược điểm : Document không thể lớn quá 16MB, hiệu suất thêm sửa xóa cực kì chậm, phân trang kém(không thể lấy hết ra sau đó skip) ==> KHÔNG NÊN (phù hợp với sinh viên)
+- Nhược điểm : Document không thể lớn quá 16MB, hiệu suất thêm sửa xóa cực kì chậm, phân trang kém(không thể lấy hết ra sau đó skip) ==> KHÔNG NÊN (phù hợp với sinh viên)
 
-Nhược điểm : Phải tốn nhiều truy vấn hơn, nếu có 100000 document thì việc phân trang nó cũng không hiệu quả(cam đoan với ae trong code đang dùng skip, limit), vì nó cũng sẽ request hết 100000 document về rồi mới phân trang kể cả việc mình có đánh index
+- Nhược điểm : Phải tốn nhiều truy vấn hơn, nếu có 100000 document thì việc phân trang nó cũng không hiệu quả(cam đoan với ae trong code đang dùng skip, limit), vì nó cũng sẽ request hết 100000 document về rồi mới phân trang kể cả việc mình có đánh index
 
-HANDLE : Bucket Pattern (Chia nhỏ dữ liệu ra để tránh việc lấy hết ra sau đó skip) ,chúng ta sẽ chia nhỏ dữ liệu ra thành các nhóm nhỏ, mỗi nhóm sẽ chứa 1 số lượng dữ liệu nhất định, khi cần phân trang chúng ta sẽ lấy ra nhóm đó và phân trang trong nhóm đó
+- HANDLE : Bucket Pattern (Chia nhỏ dữ liệu ra để tránh việc lấy hết ra sau đó skip) ,chúng ta sẽ chia nhỏ dữ liệu ra thành các nhóm nhỏ, mỗi nhóm sẽ chứa 1 số lượng dữ liệu nhất định, khi cần phân trang chúng ta sẽ lấy ra nhóm đó và phân trang trong nhóm đó
 
 ## Bucket Pattern là gì?
 
@@ -134,15 +183,15 @@ Cái này sẽ không nhúng thằng con vaofo thắng cha mà sẽ nhúng thằ
 
 ```js
 const host = {
-  id:ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+  id:ObjectId("host"),
   logs:[
     {
-      id:ObjectId("5f43f3f3f3f3f3f3f3f3f4"),
+      id:ObjectId("log1"),
       message : "System is running low on memory",
       timestamp : "2020-08-24T12:34:56.789Z"
     },
     {
-      id:ObjectId("5f43f3f3f3f3f3f3f3f3f5"),
+      id:ObjectId("log2"),
       message : "System is running low on disk space",
       timestamp : "2020-08-24T12:34:56.789Z"
     }
@@ -152,10 +201,10 @@ const host = {
 
 
 const host = {
-  id:ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+  id:ObjectId("host"),
   logs:[
-    ObjectId("5f43f3f3f3f3f3f3f3f3f4"),
-    ObjectId("5f43f3f3f3f3f3f3f3f3f5")
+    ObjectId("log1"),
+    ObjectId("log2")
   ]
 }
 ```
@@ -166,22 +215,22 @@ Chúng ta sẽ làm như thế này:
 
 ```js
 const host = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+  id: ObjectId("host"),
 };
 
 const log1 = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
-  hostId: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+  id: ObjectId("log1"),
+  hostId: ObjectId("host"),
 };
 
 const log2 = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
-  hostId: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+  id: ObjectId("log2"),
+  hostId: ObjectId("host"),
 };
 
 const log3 = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
-  hostId: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+  id: ObjectId("log3"),
+  hostId: ObjectId("host"),
 };
 ```
 
@@ -190,34 +239,38 @@ const log3 = {
 VD: 1 user có nhiều task và 1 task có nhiều user
 
 ```js
-const user = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+const user1 = {
+  id: ObjectId("user1"),
   name: "John Doe",
   tasks: [
     {
-      id: ObjectId("5f43f3f3f3f3f3f3f3f3f4"),
+      id: ObjectId("task1"),
       name: "Task 1",
     },
     {
-      id: ObjectId("5f43f3f3f3f3f3f3f3f3f5"),
+      id: ObjectId("task2"),
       name: "Task 2",
     },
   ],
 };
 
-const task = {
-  id: ObjectId("5f43f3f3f3f3f3f3f3f3f3"),
+const task1 = {
+  id: ObjectId("task1"),
   name: "Task 1",
   users: [
-    ObjectId("5f43f3f3f3f3f3f3f3f3f4"),
-    ObjectId("5f43f3f3f3f3f3f3f3f3f5"),
+    ObjectId("user1"),
+    ObjectId("user2"),
   ],
 };
 ```
 
-## Các mô hình triển khai MongoDB
+## Lựa chọn giữa nhúng và tham chiếu
+- Xem xét về mối quan hệ giữa các document, nếu mối quan hệ giữa các document là one-to-one hoặc one-to-few thì chúng ta nên sử dụng embedding, nếu mối quan hệ giữa các document là one-to-many hoặc many-to-many thì chúng ta nên sử dụng reference.
+- Xác định kiểu truy cập dữ liệu, nếu dữ liệu được truy cập nhiều hơn được cập nhật thì chúng ta nên sử dụng embedding, nếu dữ liệu được cập nhật nhiều hơn được truy cập thì chúng ta nên sử dụng reference.
+- Luôn ưu tiên việc nhúng dữ liệu vào document trước khi sử dụng reference.
 
-# Các Mô Hình Triển Khai MongoDB
+
+## Các mô hình triển khai MongoDB
 
 ## 1. Standalone
 
@@ -266,278 +319,41 @@ Một tập hợp các replica set, mỗi replica set sẽ chứa một bản sa
 
 - 12 DESIGN PATTERN: Chúng ta chỉ cần nắm rõ khi nào sử dụng cái nào thôi
 
-## Các vấn đề về hiệu năng
-
 ## Indexing
+- Indexing: Là quá trình tạo ra một cấu trúc dữ liệu giúp cho việc tìm kiếm, sắp xếp, phân trang trở nên nhanh hơn.
+- Nếu chúng ta không tạo index thì MongoDB sẽ phải quét toàn bộ document để tìm kiếm, sắp xếp, phân trang.
+- Nếu chúng ta tạo index thì MongoDB sẽ sử dụng index để tìm kiếm, sắp xếp, phân trang.
+- Index tồn tại bổ sung cho mỗi collection, về cơ bản là 1 danh sách có thứ tự của các giá trị
+- Đừng tạo index quá nhiều, vì nó sẽ làm giảm hiệu suất ghi, lí do là vì khi chúng ta ghi dữ liệu thì MongoDB sẽ phải cập nhật index.
+- Nếu collection của chúng ta có ít dữ liệu thì không cần tạo index, vì việc tìm kiếm, sắp xếp, phân trang không mất nhiều thời gian.
+- Nếu hiệu suất đọc dữ liệu của chúng ta chậm thì cần tạo index, hiệu suất ghi dữ liệu chậm thì không cần tạo index.
+- Đánh index cho các filed thực sự có ý nghĩa
+
+## Các loại index
+- Single Field Index: Index cho một field.
+- Compound Index: Index cho nhiều field.
+- Multikey Index: Index cho một field là một mảng.
+- Text Index: Index cho một field là một chuỗi ký tự.
+- Hashed Index: Index cho một field là một chuỗi ký tự, số.
+- Geospatial Index: Index cho một field là một tọa độ.
+- 2dsphere Index: Index cho một field là một tọa độ trên một hình cầu.
+- 2d Index: Index cho một field là một tọa độ trên một hình phẳng.
+
+
+## Các vấn đề về hiệu năng
 
 ## Các vấn đề về bảo mật
 
-## Ví du
-
-1.Tạo 1 Schema
-
-```js
-const crypto = require("crypto");
-const mongoose = require("mongoose");
-const validator = require("validator");
-const bcrypt = require("bcryptjs");
-
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "Please tell us your name!"],
-  },
-  email: {
-    type: String,
-    required: [true, "Please provide your email"],
-    unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, "Please provide a valid email"],
-  },
-  photo: {
-    type: String,
-    default: "default.jpg",
-  },
-  role: {
-    type: String,
-    enum: ["user", "guide", "lead-guide", "admin"],
-    default: "user",
-  },
-  password: {
-    type: String,
-    required: [true, "Please provide a password"],
-    minlength: 8,
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, "Please confirm your password"],
-    validate: {
-      // This only works on CREATE and SAVE!!!
-      validator: function (el) {
-        return el === this.password;
-      },
-      message: "Passwords are not the same!",
-    },
-  },
-  passwordChangedAt: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
-});
-
-userSchema.pre("save", async function (next) {
-  // Only run this function if password was actually modified
-  if (!this.isModified("password")) return next();
-
-  // Hash the password with cost of 12
-  this.password = await bcrypt.hash(this.password, 12);
-
-  // Delete passwordConfirm field
-  this.passwordConfirm = undefined;
-  next();
-});
-
-userSchema.pre("save", function (next) {
-  if (!this.isModified("password") || this.isNew) return next();
-
-  this.passwordChangedAt = Date.now() - 1000;
-  next();
-});
-
-userSchema.pre(/^find/, function (next) {
-  // this points to the current query
-  this.find({ active: { $ne: false } });
-  next();
-});
-
-userSchema.methods.correctPassword = async function (
-  candidatePassword,
-  userPassword
-) {
-  return await bcrypt.compare(candidatePassword, userPassword);
-};
-
-userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
-  if (this.passwordChangedAt) {
-    const changedTimestamp = parseInt(
-      this.passwordChangedAt.getTime() / 1000,
-      10
-    );
-
-    return JWTTimestamp < changedTimestamp;
-  }
-
-  // False means NOT changed
-  return false;
-};
-
-userSchema.methods.createPasswordResetToken = function () {
-  const resetToken = crypto.randomBytes(32).toString("hex");
-
-  this.passwordResetToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
-
-  // console.log({ resetToken }, this.passwordResetToken);
-
-  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
-
-  return resetToken;
-};
-
-const User = mongoose.model("User", userSchema);
-
-module.exports = User;
-```
-
-```js
-const mongoose = require("mongoose");
-
-const bookingSchema = new mongoose.Schema({
-  tour: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Tour",
-    required: [true, "Booking must belong to a Tour!"],
-  },
-  user: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
-    required: [true, "Booking must belong to a User!"],
-  },
-  price: {
-    type: Number,
-    require: [true, "Booking must have a price."],
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-  paid: {
-    type: Boolean,
-    default: true,
-  },
-});
-
-bookingSchema.pre(/^find/, function (next) {
-  this.populate("user").populate({
-    path: "tour",
-    select: "name",
-  });
-  next();
-});
-
-const Booking = mongoose.model("Booking", bookingSchema);
-
-module.exports = Booking;
-```
-
-FACTORY CRUD
-
-```js
-const catchAsync = require("./../utils/catchAsync");
-const AppError = require("./../utils/appError");
-const APIFeatures = require("./../utils/apiFeatures");
-
-exports.deleteOne = (Model) =>
-  catchAsync(async (req, res, next) => {
-    const doc = await Model.findByIdAndDelete(req.params.id);
-
-    if (!doc) {
-      return next(new AppError("No document found with that ID", 404));
-    }
-
-    res.status(204).json({
-      status: "success",
-      data: null,
-    });
-  });
-
-exports.updateOne = (Model) =>
-  catchAsync(async (req, res, next) => {
-    const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!doc) {
-      return next(new AppError("No document found with that ID", 404));
-    }
-
-    res.status(200).json({
-      status: "success",
-      data: {
-        data: doc,
-      },
-    });
-  });
-
-exports.createOne = (Model) =>
-  catchAsync(async (req, res, next) => {
-    const doc = await Model.create(req.body);
-
-    res.status(201).json({
-      status: "success",
-      data: {
-        data: doc,
-      },
-    });
-  });
-
-exports.getOne = (Model, popOptions) =>
-  catchAsync(async (req, res, next) => {
-    let query = Model.findById(req.params.id);
-    if (popOptions) query = query.populate(popOptions);
-    const doc = await query;
-
-    if (!doc) {
-      return next(new AppError("No document found with that ID", 404));
-    }
-
-    res.status(200).json({
-      status: "success",
-      data: {
-        data: doc,
-      },
-    });
-  });
-
-exports.getAll = (Model) =>
-  catchAsync(async (req, res, next) => {
-    // To allow for nested GET reviews on tour (hack)
-    let filter = {};
-    if (req.params.tourId) filter = { tour: req.params.tourId };
-
-    const features = new APIFeatures(Model.find(filter), req.query)
-      .filter()
-      .sort()
-      .limitFields()
-      .paginate();
-    // const doc = await features.query.explain();
-    const doc = await features.query;
-
-    // SEND RESPONSE
-    res.status(200).json({
-      status: "success",
-      results: doc.length,
-      data: {
-        data: doc,
-      },
-    });
-  });
-```
-
-Sử dụng
-
-```js
-exports.createBooking = factory.createOne(Booking);
-exports.getBooking = factory.getOne(Booking);
-exports.getAllBookings = factory.getAll(Booking);
-exports.updateBooking = factory.updateOne(Booking);
-exports.deleteBooking = factory.deleteOne(Booking);
-```
+## Transactions
+- Transactions: Là quá trình thực hiện một chuỗi các thao tác đọc, ghi, cập nhật, xóa dữ liệu mà nếu một thao tác thất bại thì tất cả các thao tác khác cũng sẽ thất bại.
+- Transactions giúp cho việc đảm bảo tính toàn vẹn của dữ liệu, đảm bảo tính nhất quán của dữ liệu.
+- Transactions MongoDB chỉ hỗ trợ cho replica set, không hỗ trợ cho standalone, sharded cluster.
+- Transactions MongoDB làm việc như thế nào:
+  - Bắt đầu một transaction.
+  - Thực hiện các thao tác đọc, ghi, cập nhật, xóa dữ liệu.
+  - Kết thúc một transaction.
+  - Nếu một thao tác thất bại thì rollback tất cả các thao tác khác.
+  - Nếu tất cả các thao tác đều thành công thì commit tất cả các thao tác.
+## Stitch
+- Stitch: Là một dịch vụ của MongoDB giúp cho việc phát triển ứng dụng trở nên dễ dàng hơn.
+- Stitch giúp cho việc xây dựng ứng dụng trở nên nhanh hơn, dễ dàng hơn, linh hoạt hơn.
